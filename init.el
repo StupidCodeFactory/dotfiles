@@ -195,3 +195,16 @@
   (untabify (point-min) (point-max)))
 
 (global-set-key (kbd "s-\\") 'iwb)
+
+;; windows rebalancing
+(defadvice split-window-vertically (after rebalance-h nil activate)
+"Calls `balance-windows' after splitting a window with C-x 2."
+(when (interactive-p)
+(balance-windows)))
+
+(defadvice delete-window (after rebalance-d nil activate)
+"Calls `balance-windows' after deleting a window with C-x 0."
+(when (interactive-p)
+(balance-windows)))
+
+
